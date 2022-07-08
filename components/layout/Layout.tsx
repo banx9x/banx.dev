@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { mdxComponents, Header, Footer } from 'components';
+import { Header, Footer } from 'components';
+import * as components from 'components/mdx';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,8 +9,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <MDXProvider components={mdxComponents}>
-      <div className='md:max-w-screen-sm w-full mx-auto px-2 antialiased tracking-wide'>
+    <MDXProvider components={components}>
+      <div className='md:max-w-screen-sm w-full mx-auto px-2 antialiased tracking-wide text-lg text-rose-50'>
         <Header />
 
         {children}

@@ -1,0 +1,32 @@
+.code {
+  display: inline-block;
+  background-color: rgb(250 250 250 / 0.05);
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: 2px 4px;
+}
+
+.code[data-line-numbers] > span[class*='line']::before {
+  counter-increment: line;
+  content: counter(line);
+
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: rgb(148, 123, 123);
+}
+
+.code > span[class*='highlighted'] {
+  background-color: rgba(200, 200, 255, 0.1);
+  border-left-color: #60a5fa;
+}
+
+.code:not([data-line-numbers]) > span[class*='line'] {
+  padding: 0 1rem;
+}
+
+.code span[class*='word'] {
+  font-weight: bold;
+  text-decoration: underline dotted 1px;
+}

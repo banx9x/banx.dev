@@ -25,8 +25,9 @@ const Document = () => {
         <link rel='manifest' href='/site.webmanifest'></link>
       </Head>
 
-      <body className='bg-zinc-800'>
+      <body className='bg-zinc-700'>
         <Main />
+
         <NextScript />
       </body>
     </Html>

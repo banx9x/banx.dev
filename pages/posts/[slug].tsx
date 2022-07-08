@@ -21,7 +21,7 @@ const Post: React.FC<PostProps> = ({ meta, mdx }) => {
   });
 
   return (
-    <main className='text-white/80 text-lg'>
+    <main>
       <Head>
         <meta name='description' content={meta.description} />
         <meta property='og:type' content='article' />
@@ -43,15 +43,17 @@ const Post: React.FC<PostProps> = ({ meta, mdx }) => {
       <div className='px-2 mb-8'>
         <h1 className='text-4xl text-rose-100 mb-2'>{meta.title}</h1>
 
-        <div className='text-rose-100/60 flex space-x-2 items-center mb-2'>
+        <div className='flex flex-col sm:flex-row items-start sm:items-center text-rose-100/60 sm:space-x-2 mb-2'>
           <div className='mr-1'>{date}</div>
 
-          {meta.categories.length > 0 && <div>·</div>}
+          {meta.categories.length > 0 && (
+            <div className='hidden sm:block'>·</div>
+          )}
 
-          <div className='flex space-x-1'>
+          <div className='flex space-x-2'>
             {meta.categories.map((category) => (
               <Link key={category} href={`/categories/${category}`}>
-                <a className='block hover:bg-white/10 transition duration-150 py-1 px-2'>
+                <a className='block hover:bg-white/10 transition duration-150 p-1'>
                   {category}
                 </a>
               </Link>

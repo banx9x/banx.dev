@@ -56,7 +56,7 @@ const Header = () => {
       </div>
 
       {router.asPath === '/' && (
-        <div className='text-white/80 text-lg mb-8'>
+        <div className='text-white/80 mb-8'>
           Chào bạn đến với Blog của tôi, đây là nơi tôi chia sẻ những hiểu biết
           của mình về công nghệ, những gì tôi đang học và đang làm, để giúp mọi
           người (và chính tôi) trở thành những lập trình viên tốt hơn 💪

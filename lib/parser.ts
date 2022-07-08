@@ -1,5 +1,4 @@
 import { serialize } from 'next-mdx-remote/serialize';
-import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 
 const options = {
@@ -34,7 +33,10 @@ export const parser = async (content: string) => {
   return await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [[rehypePrettyCode, options]],
+      rehypePlugins: [
+        [require('rehype-img-size'), { dir: 'public' }],
+        [require('rehype-pretty-code'), options],
+      ],
     },
   });
 };

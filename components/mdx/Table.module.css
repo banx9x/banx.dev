@@ -1,0 +1,34 @@
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  font-variant-numeric: lining-nums;
+  overflow: auto;
+  width: 100%;
+  table-layout: auto;
+}
+
+.table thead tr {
+  background-color: rgba(255, 228, 230, 0.1);
+}
+
+.table tbody tr {
+  background-color: rgba(200, 200, 255, 0.1);
+  border-top-color: rgba(200, 200, 255, 0.1);
+  border-block-start: 1px solid rgba(200, 200, 255, 0.1);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: rgba(200, 200, 255, 0.05);
+}
+
+.table th,
+.table td {
+  border: 1px solid #6e7681;
+  padding-block: 8px;
+  padding-inline: 16px;
+}
+
+.table th {
+  white-space: nowrap;
+}

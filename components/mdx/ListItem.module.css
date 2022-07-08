@@ -1,0 +1,15 @@
+.list-item > p {
+  padding: 0;
+}
+
+.list-item[class*='task-list-item'] {
+  list-style: none;
+  margin-bottom: 2px;
+}
+
+.list-item[class*='task-list-item'] input[type='checkbox'] {
+  color: rgba(200, 200, 255, 0.1);
+  width: 20px;
+  height: 20px;
+  margin-bottom: 3px;
+}
