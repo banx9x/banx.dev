@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Footer = () => {
   return (
     <div className='mt-24 pb-24 text-rose-300 flex items-center space-x-2 justify-center'>

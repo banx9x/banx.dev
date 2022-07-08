@@ -153,7 +153,7 @@ const a: React.FC<
 > = ({ children, href, ...props }) => {
   if (href?.startsWith('http'))
     return (
-      <a {...props} href={href} target='_blank'>
+      <a {...props} href={href} target='_blank' rel='noreferrer'>
         <span className='font-semibold bg-clip-text bg-gradient-to-tl from-orange-400 to-purple-400 text-transparent'>
           {children}
         </span>
@@ -223,6 +223,7 @@ const components = {
   code,
   ul,
   ol,
+  li,
 };
 
 export default components;

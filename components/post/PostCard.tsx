@@ -1,8 +1,6 @@
-import { Categories } from 'components/categories';
 import { PostMeta } from 'lib/posts';
 import Link from 'next/link';
 import React from 'react';
-import moment from 'moment';
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 

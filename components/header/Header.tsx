@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 const Header = () => {
   const router = useRouter();
@@ -37,6 +36,7 @@ const Header = () => {
           <a
             href='https://github.com/banx9x'
             target='_blank'
+            rel='noreferrer'
             className='flex space-x-2 items-center pr-2 py-1 transition-all duration-300'>
             <div className='bg-gradient-to-tl from-orange-600 to-purple-600 rounded-md p-1 text-white/80 shadow-lg group-hover:shadow-purple-400/30 transition-all duration-300 group-hover:rounded-lg group-hover:scale-125'>
               <svg

@@ -2,7 +2,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 import { getPaths, getPostBySlug, PostMeta } from 'lib/posts';
 import Head from 'next/head';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { parser } from 'lib';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
@@ -31,12 +31,13 @@ const Post: React.FC<PostProps> = ({ meta, mdx }) => {
         />
         <meta property='og:description' content={meta.description} />
         <meta property='og:image' content={meta.image} />
+        <meta property='og:image:alt' content={meta.title} />
         <meta
           property='og:url'
           content={'https://banx.dev/posts/' + meta.slug}
         />
         <meta property='og:site_name' content="Ba Nguyễn's Blog" />
-        <title>{meta.title} | Ba Nguyễn's Blog</title>
+        <title>{meta.title} | Ba Nguyễn&apos;s Blog</title>
       </Head>
 
       <div className='px-2 mb-8'>
