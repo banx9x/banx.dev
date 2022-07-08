@@ -26,9 +26,9 @@ export const getSortedPosts = (): PostMeta[] => {
   const posts = files.map((filename) => {
     const md = fs.readFileSync(path.join(postsDirectory, filename), 'utf-8');
 
-    const [slug, ext] = filename.split('.');
+    const [slug] = filename.split('.');
 
-    const { data, content } = matter(md);
+    const { data } = matter(md);
 
     return {
       slug,
