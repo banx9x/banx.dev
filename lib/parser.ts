@@ -30,7 +30,7 @@ const options = {
   },
 };
 
-export const parseMd = async (content: string) => {
+export const parser = async (content: string) => {
   return await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],

@@ -9,6 +9,19 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <div className=''>
       <Head>
+        <meta
+          name='description'
+          content='Một chiếc blog công nghệ nhỏ của Ba Nguyễn'
+        />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content="Ba Nguyễn's Blog" />
+        <meta
+          property='og:description'
+          content='Một chiếc blog công nghệ nhỏ của Ba Nguyễn'
+        />
+        <meta property='og:image' content='/favicon-512x512.png' />
+        <meta property='og:url' content='https://banx.dev/' />
+        <meta property='og:site_name' content="Ba Nguyễn's Blog" />
         <title>Ba Nguyễn's Blog</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>

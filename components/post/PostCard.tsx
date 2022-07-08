@@ -25,7 +25,9 @@ const PostCard: React.FC<PostMeta> = ({
             <div className='flex items-center space-x-2 text-md text-rose-100/50 mb-2'>
               <div>{date}</div>
 
-              {categories.length > 0 && <div>·</div>}
+              {categories.length > 0 && (
+                <div className='hidden sm:block'>·</div>
+              )}
 
               {categories.map((category) => (
                 <div key={category}>{category}</div>

@@ -5,6 +5,7 @@ const Document = () => {
   return (
     <Html lang='vi'>
       <Head>
+        <meta name='robots' content='index,follow' />
         <link
           rel='apple-touch-icon'
           sizes='180x180'

@@ -4,7 +4,7 @@ import { getPaths, getPostBySlug, PostMeta } from 'lib/posts';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { parseMd } from 'lib/utils';
+import { parser } from 'lib';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
 import { format } from 'date-fns';
@@ -23,7 +23,19 @@ const Post: React.FC<PostProps> = ({ meta, mdx }) => {
   return (
     <main className='text-white/80 text-lg'>
       <Head>
-        <meta name='description' content={meta.excerpt} />
+        <meta name='description' content={meta.description} />
+        <meta property='og:type' content='article' />
+        <meta
+          property='og:title'
+          content={meta.title + " | Ba Nguyễn's Blog"}
+        />
+        <meta property='og:description' content={meta.description} />
+        <meta property='og:image' content={meta.image} />
+        <meta
+          property='og:url'
+          content={'https://banx.dev/posts/' + meta.slug}
+        />
+        <meta property='og:site_name' content="Ba Nguyễn's Blog" />
         <title>{meta.title} | Ba Nguyễn's Blog</title>
       </Head>
 
@@ -74,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { meta, content } = getPostBySlug(slug);
 
-  const mdx = await parseMd(content);
+  const mdx = await parser(content);
 
   return {
     props: {

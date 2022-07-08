@@ -12,6 +12,8 @@ interface PostContent {
 export interface PostMeta {
   slug: string;
   title: string;
+  description: string;
+  image: string;
   excerpt: string;
   publishedAt: string;
   categories: string[];
@@ -31,6 +33,8 @@ export const getSortedPosts = (): PostMeta[] => {
     return {
       slug,
       title: data.title,
+      description: data.description,
+      image: data.image,
       excerpt: data.excerpt,
       publishedAt: data.publishedAt,
       categories: data.categories.sort(),
@@ -68,6 +72,8 @@ export const getPostBySlug = (slug: string): PostContent => {
     meta: {
       slug,
       title: data.title,
+      description: data.description,
+      image: data.image,
       excerpt: data.excerpt,
       publishedAt: data.publishedAt,
       categories: data.categories.sort(),
