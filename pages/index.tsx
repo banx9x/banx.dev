@@ -50,5 +50,7 @@ export const getStaticProps = async () => {
       posts,
       pageInfo,
     },
+
+    revalidate: 60,
   };
 };
