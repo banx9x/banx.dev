@@ -19,7 +19,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           property='og:description'
           content='Một chiếc blog công nghệ nhỏ của Ba Nguyễn'
         />
-        <meta property='og:image' content='/images/blog.jpg' />
+        <meta
+          property='og:image'
+          content='https://media.graphassets.com/6KfoJnRimPPxIuyO05bw'
+        />
         <meta property='og:image:alt' content="Ba nguyễn's Blog" />
         <meta property='og:url' content='https://banx.dev/' />
         <meta property='og:site_name' content="Ba Nguyễn's Blog" />

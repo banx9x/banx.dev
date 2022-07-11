@@ -20,7 +20,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'require-jsdoc': 0,
-    'no-unused-vars': ['warn', { arg: 'none' }],
+    'no-unused-vars': ['warn', { args: 'none' }],
     'react/prop-types': 0,
   },
 };
