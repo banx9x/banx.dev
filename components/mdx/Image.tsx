@@ -1,5 +1,4 @@
 import React from 'react';
-import NextImage from 'next/image';
 
 const Image: React.FC<
   React.DetailedHTMLProps<
@@ -7,18 +6,7 @@ const Image: React.FC<
     HTMLImageElement
   >
 > = ({ src, alt, width, height, ...props }) => {
-  return (
-    <NextImage
-      {...props}
-      src={src!}
-      alt={alt}
-      width={width}
-      height={height}
-      blurDataURL={src}
-      layout='responsive'
-      placeholder='blur'
-    />
-  );
+  return <img src={src} alt={alt} {...props} className='block mx-auto' />;
 };
 
 export default Image;

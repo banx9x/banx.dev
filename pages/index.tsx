@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
-import { PostCard } from 'components';
-import { getSortedPosts } from 'lib';
+import PostCard from 'components/post';
+import { getPosts } from 'services/posts';
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
@@ -19,17 +19,16 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           property='og:description'
           content='Một chiếc blog công nghệ nhỏ của Ba Nguyễn'
         />
-        <meta property='og:image' content='/images/ba-nguyen-blog.jpg' />
+        <meta property='og:image' content='/images/blog.jpg' />
         <meta property='og:image:alt' content="Ba nguyễn's Blog" />
         <meta property='og:url' content='https://banx.dev/' />
         <meta property='og:site_name' content="Ba Nguyễn's Blog" />
         <title>Ba Nguyễn&apos;s Blog</title>
-        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main className='space-y-8'>
         {posts.map((post) => (
-          <PostCard key={post.slug} {...post} />
+          <PostCard key={post.node.id} post={post.node} />
         ))}
       </main>
 
@@ -41,11 +40,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default Home;
 
 export const getStaticProps = async () => {
-  const posts = getSortedPosts();
+  const { posts, pageInfo } = await getPosts();
 
   return {
     props: {
       posts,
+      pageInfo,
     },
   };
 };

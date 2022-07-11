@@ -1,41 +1,36 @@
-import { PostMeta } from 'lib/posts';
 import Link from 'next/link';
 import React from 'react';
-import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import { PostFragment } from 'generated/graphql';
+import { locale } from 'lib/utils';
 
-const PostCard: React.FC<PostMeta> = ({
-  title,
-  excerpt,
-  publishedAt,
-  categories,
-  slug,
-}) => {
-  const date = format(new Date(publishedAt), 'dd MMMM yyyy', { locale: vi });
+interface PostCardProps {
+  post: PostFragment;
+}
 
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <Link href={`/posts/${slug}`}>
+    <Link href={`/posts/${post.slug}`}>
       <a className='block'>
         <article>
           <div className='w-full rounded-lg bg-white/5 hover:bg-white/10 transition duration-200 shadow-lg p-4'>
-            <h2 className='text-rose-100 font-medium text-lg'>{title}</h2>
+            <h2 className='text-rose-100 font-medium text-lg'>{post.title}</h2>
 
             <div className='flex flex-col item-start sm:flex-row sm:items-center sm:space-x-2 text-md text-rose-100/50 mb-2'>
-              <div>{date}</div>
+              <div>{locale(post.publishedAt)}</div>
 
-              {categories.length > 0 && (
+              {post.categories.length > 0 && (
                 <div className='hidden sm:block'>·</div>
               )}
 
               <div className='flex space-x-2'>
-                {categories.map((category) => (
-                  <div key={category}>{category}</div>
+                {post.categories.map(({ id, name, slug }) => (
+                  <div key={id}>{name}</div>
                 ))}
               </div>
             </div>
 
             <p className='text-rose-100/80 text-lg leading-relaxed'>
-              {excerpt}
+              {post.excerpt}
             </p>
           </div>
         </article>

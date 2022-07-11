@@ -1,0 +1,95 @@
+---
+title: 'Hello World'
+description: 'Giới thiệu tác giả Ba Nguyễn và render một số nội dung Markdown mẫu'
+image: '/images/hello-world.jpg'
+excerpt: 'Chào mọi người, đây là bài viết đầu tiên của mình, sau khi tốn kha khá thời gian để làm trang blog này 😅'
+publishedAt: '2022-07-01'
+categories: []
+series: ''
+---
+
+## Giới thiệu bản thân
+
+Mình là **Ba**, công việc của mình tại thời điểm post cái bài này là Developer, Teacher tại [Techmaster](https://techmaster.vn/ 'Học viện công nghệ Techmaster')
+
+Đây là mình của nhiều năm về trước 😎
+
+![Ba Nguyễn](/images/avatar.jpeg)
+
+## Mục đích tạo ra trang blog này
+
+Do rảnh rỗi quá không có gì làm thôi 🤣 Ngoài ra thì, do mình hay có thói quen ghi chú lại những gì mình học được bằng Markdown, tiện đây thì làm một trang Blog hỗ trợ Markdown ([MDX](https://mdxjs.com/)) để chia sẻ tới mọi người, hy vọng có người vào đọc là vui rồi 🤓
+
+Thế thôi, bài viết đầu tiên này sẽ bao gồm một số nội dung mẫu để test chức năng render markdown, chứ chưa có gì đặc biệt
+
+## MDX
+
+### Inline Code
+
+Syntax highlight cho inline code: `alert('Hello World!');{:js}`
+
+### Block Code
+
+Style một chút, thêm chức năng highlight, filename, và nút copy
+
+```js showLineNumbers{1} title="script.js"
+const myName = 'Ba Nguyễn';
+
+console.log(myName);
+```
+
+```bash title="Terminal" /create/
+yarn create next-app -e with-tailwindcss --ts
+```
+
+### Links
+
+Auto link: https://google.com/
+
+Hoặc [về trang chủ](/)
+
+### Lists
+
+#### Ordered List
+
+1. Item 1
+2. Item 2
+3. Item 3
+
+#### Unordered List
+
+- Item 1
+- Item 2
+- Item 3
+
+#### Nested List
+
+1. Item 1
+
+   - Sub Item 1
+   - Sub Item 2
+
+2. Item 2
+
+### Table
+
+| Heading 1                   |              Heading 2              |                       Heading 3 | Heading 4                  |
+| :-------------------------- | :---------------------------------: | ------------------------------: | -------------------------- |
+| Text Align Left             |          Text Align Center          |                Text Align Right | Text Align Default         |
+| Inline Code vs Custom Token | `console.log('Hello World!');{:js}` | `querySelector(selector){:.fn}` | Block code thì chưa hỗ trợ |
+
+### Task List
+
+- [x] MDX Supported
+- [x] [GFM](https://github.github.com/gfm/) Supported
+- [x] Custom Components
+- [ ] Floating Navbar
+- [ ] Categories Page
+- [ ] Search
+- [ ] Views vs Likes
+
+### Quotes
+
+> ### Heading
+>
+> And Quotes

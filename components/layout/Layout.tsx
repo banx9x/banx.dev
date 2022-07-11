@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { Header, Footer } from 'components';
+import Header from 'components/header';
+import Footer from 'components/footer';
 import * as components from 'components/mdx';
 
 interface LayoutProps {
@@ -10,10 +11,10 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <MDXProvider components={components}>
-      <div className='md:max-w-screen-sm w-full mx-auto px-2 antialiased tracking-wide text-lg text-rose-50'>
+      <div className='container antialiased tracking-wide text-lg text-rose-50'>
         <Header />
 
-        {children}
+        <div className='pt-24'>{children}</div>
 
         <Footer />
       </div>

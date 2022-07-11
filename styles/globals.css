@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .container {
+    @apply md:max-w-screen-sm w-full mx-auto px-3;
+  }
+
+  .bg-gradient {
+    @apply bg-gradient-to-tl from-amber-600 to-indigo-600;
+  }
+
+  .bg-dark {
+    @apply bg-zinc-700;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text bg-gradient-to-tl from-amber-500 to-indigo-500 text-transparent;
+  }
+
+  .text-dim {
+    @apply text-zinc-50/50;
+  }
+
+  .text-light {
+    @apply text-zinc-50/90;
+  }
+}

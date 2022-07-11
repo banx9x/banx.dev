@@ -1,67 +1,62 @@
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
-import { getPaths, getPostBySlug, PostMeta } from 'lib/posts';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { parser } from 'lib';
+import { parser } from 'lib/utils/parser';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
-import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import { getPostBySlug, getSlugs } from 'services/posts';
+import { PostQuery } from 'generated/graphql';
+import { locale } from 'lib/utils';
 
-interface PostProps {
-  meta: PostMeta;
+interface PostProps extends PostQuery {
   mdx: MDXRemoteSerializeResult;
 }
 
-const Post: React.FC<PostProps> = ({ meta, mdx }) => {
-  const date = format(new Date(meta.publishedAt), 'dd MMMM yyyy', {
-    locale: vi,
-  });
-
+const Post: React.FC<PostProps> = ({ post, mdx }) => {
   return (
-    <main>
+    <main className='pt-24'>
       <Head>
-        <meta name='description' content={meta.description} />
+        <meta name='description' content={post!.description} />
         <meta property='og:type' content='article' />
         <meta
           property='og:title'
-          content={meta.title + " | Ba Nguyễn's Blog"}
+          content={post!.title + " | Ba Nguyễn's Blog"}
         />
-        <meta property='og:description' content={meta.description} />
-        <meta property='og:image' content={meta.image} />
-        <meta property='og:image:alt' content={meta.title} />
+        <meta property='og:description' content={post!.description} />
+        <meta property='og:image' content={post!.image.url} />
+        <meta property='og:image:alt' content={post!.title} />
         <meta
           property='og:url'
-          content={'https://banx.dev/posts/' + meta.slug}
+          content={'https://banx.dev/posts/' + post!.slug}
         />
         <meta property='og:site_name' content="Ba Nguyễn's Blog" />
-        <title>{meta.title} | Ba Nguyễn&apos;s Blog</title>
+        <title>{post!.title} | Ba Nguyễn&apos;s Blog</title>
       </Head>
 
       <div className='px-2 mb-8'>
-        <h1 className='text-4xl text-rose-100 mb-2'>{meta.title}</h1>
+        <h1 className='text-6xl text-rose-100 mb-2'>{post!.title}</h1>
 
-        <div className='flex flex-col sm:flex-row items-start sm:items-center text-rose-100/60 sm:space-x-2 mb-2'>
-          <div className='mr-1'>{date}</div>
+        <div className='flex flex-col sm:flex-row items-start sm:items-center text-dim sm:space-x-2 mb-2'>
+          <div className='mr-1'>{locale(post!.publishedAt)}</div>
 
-          {meta.categories.length > 0 && (
+          {post!.categories.length > 0 && (
             <div className='hidden sm:block'>·</div>
           )}
 
           <div className='flex space-x-2'>
-            {meta.categories.map((category) => (
-              <Link key={category} href={`/categories/${category}`}>
+            {post!.categories.map(({ id, name, slug }) => (
+              <Link key={id} href={`/categories/${slug}`}>
                 <a className='block hover:bg-white/10 transition duration-150 p-1'>
-                  {category}
+                  {name}
                 </a>
               </Link>
             ))}
           </div>
         </div>
 
-        <div className='text-lg leading-relaxed'>{meta.excerpt}</div>
+        <div className='text-lg leading-relaxed'>{post!.excerpt}</div>
       </div>
 
       <MDXRemote {...mdx}></MDXRemote>
@@ -72,7 +67,7 @@ const Post: React.FC<PostProps> = ({ meta, mdx }) => {
 export default Post;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getPaths();
+  const paths = await getSlugs();
 
   return {
     paths,
@@ -87,13 +82,18 @@ interface Params extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as Params;
 
-  const { meta, content } = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
-  const mdx = await parser(content);
+  if (!post)
+    return {
+      notFound: true,
+    };
+
+  const mdx = await parser(post.content);
 
   return {
     props: {
-      meta,
+      post,
       mdx,
     },
   };

@@ -33,10 +33,7 @@ export const parser = async (content: string) => {
   return await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        [require('rehype-img-size'), { dir: 'public' }],
-        [require('rehype-pretty-code'), options],
-      ],
+      rehypePlugins: [[require('rehype-pretty-code'), options]],
     },
   });
 };
