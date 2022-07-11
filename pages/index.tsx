@@ -51,6 +51,6 @@ export const getStaticProps = async () => {
       pageInfo,
     },
 
-    revalidate: 60,
+    revalidate: 10,
   };
 };

@@ -87,6 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!post)
     return {
       notFound: true,
+      revalidate: 10,
     };
 
   const mdx = await parser(post.content);
@@ -97,6 +98,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       mdx,
     },
 
-    revalidate: 60,
+    revalidate: 10,
   };
 };
