@@ -14,7 +14,7 @@ const Header = () => {
     return (
       <div className='pt-24 px-3' ref={ref}>
         <div className='flex space-x-4 items-center mb-8'>
-          <Avatar src='/images/avatar.jpeg' size='large' />
+          <Avatar size='large' />
 
           <div className='flex flex-col'>
             <div className='text-gradient text-xl font-semibold'>Ba Nguyễn</div>

@@ -3,11 +3,10 @@ import Image from 'next/image';
 import cn from 'clsx';
 
 interface AvatarProps {
-  src: string;
   size: 'small' | 'large';
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, size }) => {
+const Avatar: React.FC<AvatarProps> = ({ size }) => {
   const avatarSize = size === 'small' ? 'w-8 h-8' : 'w-16 h-16';
 
   return (
@@ -19,7 +18,10 @@ const Avatar: React.FC<AvatarProps> = ({ src, size }) => {
               'block relative rounded-full overflow-hidden',
               avatarSize
             )}>
-            <Image src='/images/avatar.jpeg' layout='fill' />
+            <Image
+              src='https://media.graphassets.com/aWrIjtZvRXly1Sv7IkR4'
+              layout='fill'
+            />
           </a>
         </Link>
       </div>
