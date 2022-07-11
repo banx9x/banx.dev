@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import style from './Pre.module.css';
-import cn from 'clsx';
 
 const Pre: React.FC<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>
