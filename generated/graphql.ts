@@ -4974,7 +4974,9 @@ export type SeriesFragment = { id: string, title: string, slug: string };
 
 export type PostFragment = { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null };
 
-export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+export type PostsQueryVariables = Exact<{
+  skip?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type PostsQuery = { postsConnection: { edges: Array<{ node: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } }>, pageInfo: { hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
@@ -5042,8 +5044,13 @@ export const PostDocument = gql`
 }
     `;
 export const PostsDocument = gql`
-    query posts {
-  postsConnection(stage: PUBLISHED, orderBy: publishedAt_DESC, first: 10) {
+    query posts($skip: Int) {
+  postsConnection(
+    stage: PUBLISHED
+    orderBy: publishedAt_DESC
+    first: 3
+    skip: $skip
+  ) {
     edges {
       node {
         ...Post

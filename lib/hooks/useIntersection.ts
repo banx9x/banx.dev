@@ -10,7 +10,7 @@ export const useIntersection = <T extends HTMLElement>(): [
   const options = {
     root: null,
     rootMargin: '0px',
-    thresold: 1.0,
+    thresold: [1],
   };
 
   useEffect(() => {
@@ -18,6 +18,8 @@ export const useIntersection = <T extends HTMLElement>(): [
 
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
+
+      console.log(entry.isIntersecting);
 
       setVisible(entry.isIntersecting);
     }, options);

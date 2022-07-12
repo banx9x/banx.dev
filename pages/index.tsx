@@ -1,7 +1,10 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
-import PostCard from 'components/post';
 import { getPosts } from 'services/posts';
+import Header from 'components/header';
+import Navbar from 'components/navbar';
+import PostCard from 'components/post';
+import Footer from 'components/footer';
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
@@ -29,13 +32,17 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <title>Ba Nguyễn&apos;s Blog</title>
       </Head>
 
-      <main className='space-y-8'>
+      <Header />
+
+      <Navbar />
+
+      <main className='space-y-8 mt-8'>
         {posts.map((post) => (
           <PostCard key={post.node.id} post={post.node} />
         ))}
       </main>
 
-      <footer className=''></footer>
+      <Footer />
     </div>
   );
 };

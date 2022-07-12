@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { getPostBySlug, getSlugs } from 'services/posts';
 import { PostQuery } from 'generated/graphql';
 import { locale } from 'lib/utils';
+import Navbar from 'components/navbar';
 
 interface PostProps extends PostQuery {
   mdx: MDXRemoteSerializeResult;
@@ -16,7 +17,7 @@ interface PostProps extends PostQuery {
 
 const Post: React.FC<PostProps> = ({ post, mdx }) => {
   return (
-    <main className='pt-24'>
+    <React.Fragment>
       <Head>
         <meta name='description' content={post!.description} />
         <meta property='og:type' content='article' />
@@ -35,32 +36,36 @@ const Post: React.FC<PostProps> = ({ post, mdx }) => {
         <title>{post!.title} | Ba Nguyễn&apos;s Blog</title>
       </Head>
 
-      <div className='px-2 mb-8'>
-        <h1 className='text-6xl text-rose-100 mb-2'>{post!.title}</h1>
+      <Navbar />
 
-        <div className='flex flex-col sm:flex-row items-start sm:items-center text-dim sm:space-x-2 mb-2'>
-          <div className='mr-1'>{locale(post!.publishedAt)}</div>
+      <main className='pt-24'>
+        <div className='px-2 mb-8'>
+          <h1 className='text-6xl text-rose-100 mb-2'>{post!.title}</h1>
 
-          {post!.categories.length > 0 && (
-            <div className='hidden sm:block'>·</div>
-          )}
+          <div className='flex flex-col sm:flex-row items-start sm:items-center text-dim sm:space-x-2 mb-2'>
+            <div className='mr-1'>{locale(post!.publishedAt)}</div>
 
-          <div className='flex space-x-2'>
-            {post!.categories.map(({ id, name, slug }) => (
-              <Link key={id} href={`/categories/${slug}`}>
-                <a className='block hover:bg-white/10 transition duration-150 p-1'>
-                  {name}
-                </a>
-              </Link>
-            ))}
+            {post!.categories.length > 0 && (
+              <div className='hidden sm:block'>·</div>
+            )}
+
+            <div className='flex space-x-2'>
+              {post!.categories.map(({ id, name, slug }) => (
+                <Link key={id} href={`/categories/${slug}`}>
+                  <a className='block hover:bg-white/10 transition duration-150 p-1'>
+                    {name}
+                  </a>
+                </Link>
+              ))}
+            </div>
           </div>
+
+          <div className='text-lg leading-relaxed'>{post!.excerpt}</div>
         </div>
 
-        <div className='text-lg leading-relaxed'>{post!.excerpt}</div>
-      </div>
-
-      <MDXRemote {...mdx}></MDXRemote>
-    </main>
+        <MDXRemote {...mdx}></MDXRemote>
+      </main>
+    </React.Fragment>
   );
 };
 

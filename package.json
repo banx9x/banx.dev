@@ -4,7 +4,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "gqltypes": "graphql-codegen --config codegen.yml",
     "gql": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {

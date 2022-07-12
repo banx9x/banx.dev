@@ -28,8 +28,13 @@ const getPosts = gql`
     }
   }
 
-  query posts {
-    postsConnection(stage: PUBLISHED, orderBy: publishedAt_DESC, first: 10) {
+  query posts($skip: Int) {
+    postsConnection(
+      stage: PUBLISHED
+      orderBy: publishedAt_DESC
+      first: 3
+      skip: $skip
+    ) {
       edges {
         node {
           ...Post
