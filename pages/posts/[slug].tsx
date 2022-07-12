@@ -1,5 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote';
-import React from 'react';
+import { Fragment } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
@@ -17,7 +17,7 @@ interface PostProps extends PostQuery {
 
 const Post: React.FC<PostProps> = ({ post, mdx }) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Head>
         <meta name='description' content={post!.description} />
         <meta property='og:type' content='article' />
@@ -65,7 +65,7 @@ const Post: React.FC<PostProps> = ({ post, mdx }) => {
 
         <MDXRemote {...mdx}></MDXRemote>
       </main>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!post)
     return {
       notFound: true,
-      revalidate: 10,
+      revalidate: 600,
     };
 
   const mdx = await parser(post.content);
@@ -103,6 +103,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       mdx,
     },
 
-    revalidate: 10,
+    revalidate: 600,
   };
 };

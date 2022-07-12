@@ -4,13 +4,13 @@ import { getPosts } from 'services/posts';
 import Header from 'components/header';
 import Navbar from 'components/navbar';
 import PostCard from 'components/post';
-import Footer from 'components/footer';
+import { Fragment } from 'react';
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
 }) => {
   return (
-    <div className=''>
+    <Fragment>
       <Head>
         <meta
           name='description'
@@ -41,9 +41,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <PostCard key={post.node.id} post={post.node} />
         ))}
       </main>
-
-      <Footer />
-    </div>
+    </Fragment>
   );
 };
 
@@ -58,6 +56,6 @@ export const getStaticProps = async () => {
       pageInfo,
     },
 
-    revalidate: 10,
+    revalidate: 600,
   };
 };
