@@ -1,4 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react';
+import theme from 'lib/utils/theme';
 
 const Document = () => {
   return (
@@ -25,7 +27,8 @@ const Document = () => {
         <link rel='manifest' href='/site.webmanifest' />
       </Head>
 
-      <body className='bg-dark'>
+      <body>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
 
         <NextScript />

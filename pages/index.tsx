@@ -1,14 +1,23 @@
-import type { InferGetStaticPropsType, NextPage } from 'next';
+import type {
+  GetServerSideProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from 'next';
 import Head from 'next/head';
 import { getPosts } from 'services/posts';
 import Header from 'components/header';
 import Navbar from 'components/navbar';
 import PostCard from 'components/post';
+import Pagination from 'components/pagination';
 import { Fragment } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+const Home: NextPage<InferGetStaticPropsType<typeof getServerSideProps>> = ({
   posts,
+  pageInfo,
 }) => {
+  console.log(pageInfo);
+
   return (
     <Fragment>
       <Head>
@@ -32,30 +41,48 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <title>Ba Nguyễn&apos;s Blog</title>
       </Head>
 
-      <Header />
-
-      <Navbar />
-
       <main className='space-y-8 mt-8'>
         {posts.map((post) => (
           <PostCard key={post.node.id} post={post.node} />
         ))}
       </main>
+
+      <Pagination {...pageInfo} currentPage={1} />
     </Fragment>
   );
 };
 
 export default Home;
 
-export const getStaticProps = async () => {
-  const { posts, pageInfo } = await getPosts();
+// export const getStaticProps = async () => {
+//   const { posts, pageInfo } = await getPosts();
+
+//   return {
+//     props: {
+//       posts,
+//       pageInfo,
+//     },
+
+//     revalidate: 600,
+//   };
+// };
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const page = ctx.query.page ? +ctx.query.page : 1;
+
+  const skip = (page - 1) * 3;
+
+  const { posts, pageInfo } = await getPosts({ skip });
+
+  if (posts.length == 0)
+    return {
+      notFound: true,
+    };
 
   return {
     props: {
       posts,
       pageInfo,
     },
-
-    revalidate: 600,
   };
 };

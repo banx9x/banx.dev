@@ -1,19 +1,7 @@
 import { gql } from 'graphql-request';
 
 const getPosts = gql`
-  fragment Category on Category {
-    id
-    name
-    slug
-  }
-
-  fragment Series on Series {
-    id
-    title
-    slug
-  }
-
-  fragment Post on Post {
+  fragment PostView on Post {
     id
     slug
     title
@@ -21,11 +9,20 @@ const getPosts = gql`
     publishedAt
     excerpt
     categories {
-      ...Category
+      id
+      name
+      slug
     }
     series {
-      ...Series
+      id
+      title
+      slug
     }
+  }
+
+  fragment PageView on PageInfo {
+    hasNextPage
+    hasPreviousPage
   }
 
   query posts($skip: Int) {
@@ -37,13 +34,11 @@ const getPosts = gql`
     ) {
       edges {
         node {
-          ...Post
+          ...PostView
         }
       }
       pageInfo {
-        hasNextPage
-        hasPreviousPage
-        pageSize
+        ...PageView
       }
     }
   }

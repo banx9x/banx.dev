@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 @layer components {
-  .container {
+  .page {
+    @apply bg-dark text-lg text-rose-50 antialiased tracking-wide;
+  }
+
+  .page-container {
     @apply md:max-w-screen-sm w-full mx-auto px-3;
+  }
+
+  .page-layout {
+    @apply min-h-screen grid grid-cols-1 grid-rows-[auto_1fr_auto];
   }
 
   .bg-gradient {
@@ -20,10 +28,10 @@
   }
 
   .text-dim {
-    @apply text-zinc-50/50;
+    @apply text-rose-50/50;
   }
 
   .text-light {
-    @apply text-zinc-50/90;
+    @apply text-rose-50/90;
   }
 }

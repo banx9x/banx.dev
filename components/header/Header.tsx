@@ -1,23 +1,20 @@
-import Avatar from 'components/avatar';
+import Logo from 'components/logo';
+import { Box, Flex, Button, useColorMode } from '@chakra-ui/react';
+import { BsMoonStars, BsSun } from 'react-icons/bs';
 
 const Header = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <div className='pt-20 px-3'>
-      <div className='flex space-x-4 items-center mb-8'>
-        <Avatar size='large' />
+    <Flex as='header' alignItems='center' justifyContent='space-between'>
+      <Logo />
 
-        <div className='flex flex-col'>
-          <div className='text-gradient text-xl font-semibold'>Ba Nguyễn</div>
-          <div className='text-dim text-md'>Web Developer</div>
-        </div>
-      </div>
-
-      <div className='text-white/80 mb-8'>
-        Chào bạn đến với Blog của tôi, đây là nơi tôi chia sẻ những gì tôi đang
-        học và đang làm, để giúp mọi người (và chính tôi) trở thành những lập
-        trình viên tốt hơn 💪
-      </div>
-    </div>
+      <Box>
+        <Button onClick={toggleColorMode}>
+          {colorMode === 'light' ? <BsSun /> : <BsMoonStars />}
+        </Button>
+      </Box>
+    </Flex>
   );
 };
 

@@ -4968,40 +4968,24 @@ export type PostQueryVariables = Exact<{
 
 export type PostQuery = { post?: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, content: string, image: { url: string }, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } | null };
 
-export type CategoryFragment = { id: string, name: string, slug: string };
+export type PostViewFragment = { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null };
 
-export type SeriesFragment = { id: string, title: string, slug: string };
-
-export type PostFragment = { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null };
+export type PageViewFragment = { hasNextPage: boolean, hasPreviousPage: boolean };
 
 export type PostsQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type PostsQuery = { postsConnection: { edges: Array<{ node: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } }>, pageInfo: { hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
+export type PostsQuery = { postsConnection: { edges: Array<{ node: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } }>, pageInfo: { hasNextPage: boolean, hasPreviousPage: boolean } } };
 
 export type SlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SlugsQuery = { posts: Array<{ slug: string }> };
 
-export const CategoryFragmentDoc = gql`
-    fragment Category on Category {
-  id
-  name
-  slug
-}
-    `;
-export const SeriesFragmentDoc = gql`
-    fragment Series on Series {
-  id
-  title
-  slug
-}
-    `;
-export const PostFragmentDoc = gql`
-    fragment Post on Post {
+export const PostViewFragmentDoc = gql`
+    fragment PostView on Post {
   id
   slug
   title
@@ -5009,14 +4993,23 @@ export const PostFragmentDoc = gql`
   publishedAt
   excerpt
   categories {
-    ...Category
+    id
+    name
+    slug
   }
   series {
-    ...Series
+    id
+    title
+    slug
   }
 }
-    ${CategoryFragmentDoc}
-${SeriesFragmentDoc}`;
+    `;
+export const PageViewFragmentDoc = gql`
+    fragment PageView on PageInfo {
+  hasNextPage
+  hasPreviousPage
+}
+    `;
 export const PostDocument = gql`
     query post($slug: String!) {
   post(where: {slug: $slug}) {
@@ -5053,17 +5046,16 @@ export const PostsDocument = gql`
   ) {
     edges {
       node {
-        ...Post
+        ...PostView
       }
     }
     pageInfo {
-      hasNextPage
-      hasPreviousPage
-      pageSize
+      ...PageView
     }
   }
 }
-    ${PostFragmentDoc}`;
+    ${PostViewFragmentDoc}
+${PageViewFragmentDoc}`;
 export const SlugsDocument = gql`
     query slugs {
   posts {
