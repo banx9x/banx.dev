@@ -1,16 +1,22 @@
-import { useRef, useState, useEffect, RefObject } from 'react';
+import { useRef, useEffect, RefObject } from 'react';
 
-export const useIntersection = <T extends HTMLElement>(): [
-  boolean,
-  RefObject<T>
-] => {
+interface IntersectionOptions {
+  rootMargin?: string;
+  thresold?: number | number[];
+  onChange?: (visible: boolean) => void;
+}
+
+export const useIntersection = <T extends HTMLElement>({
+  rootMargin,
+  thresold,
+  onChange,
+}: IntersectionOptions): RefObject<T> => {
   const ref = useRef<T>(null);
-  const [visible, setVisible] = useState(true);
 
   const options = {
     root: null,
     rootMargin: '0px',
-    thresold: [1],
+    thresold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
   };
 
   useEffect(() => {
@@ -19,7 +25,7 @@ export const useIntersection = <T extends HTMLElement>(): [
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
 
-      setVisible(entry.isIntersecting);
+      onChange && onChange(entry.isIntersecting);
     }, options);
 
     observer.observe(ref.current);
@@ -27,7 +33,7 @@ export const useIntersection = <T extends HTMLElement>(): [
     return () => {
       if (ref.current) observer.unobserve(ref.current);
     };
-  }, [ref.current]);
+  }, [ref]);
 
-  return [visible, ref];
+  return ref;
 };

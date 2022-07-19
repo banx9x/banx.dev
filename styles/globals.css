@@ -20,10 +20,10 @@
   }
 
   .text-dim {
-    @apply text-zinc-50/50;
+    @apply text-zinc-50/30;
   }
 
   .text-light {
-    @apply text-zinc-50/90;
+    @apply text-zinc-50/80;
   }
 }

@@ -1,14 +1,32 @@
-import type { InferGetStaticPropsType, NextPage } from 'next';
-import Head from 'next/head';
-import { getPosts } from 'services/posts';
+import { Transition } from '@headlessui/react';
+import { useUI } from 'components/context';
 import Header from 'components/header';
 import Navbar from 'components/navbar';
+import Pagination from 'components/pagination';
 import PostCard from 'components/post';
+import { useIntersection } from 'lib/hooks';
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
+import Head from 'next/head';
 import { Fragment } from 'react';
+import { getPosts } from 'services/posts';
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  posts,
-}) => {
+const Home: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ posts, page, pageInfo }) => {
+  const { state } = useUI();
+
+  const next = pageInfo.hasNextPage
+    ? { href: { query: { page: page + 1 } }, label: 'Older Posts' }
+    : null;
+
+  const previous = pageInfo.hasPreviousPage
+    ? { href: { query: { page: page - 1 } }, label: 'Newer Posts' }
+    : null;
+
   return (
     <Fragment>
       <Head>
@@ -34,28 +52,46 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
       <Header />
 
-      <Navbar />
+      <Transition
+        show={state.show}
+        enter='transition-all duration-300'
+        enterFrom='fixed w-full top-0 left-0 opacity-0 scale-75'
+        enterTo='fixed w-full top-0 left-0  opacity-1 scale-100'
+        leave='transition-all duration-300'
+        leaveFrom='fixed w-full top-0 left-0  opacity-1 scale-100'
+        leaveTo='fixed w-full top-0 left-0  opacity-0 scale-90'>
+        <Navbar />
+      </Transition>
 
       <main className='space-y-8 mt-8'>
         {posts.map((post) => (
-          <PostCard key={post.node.id} post={post.node} />
+          <PostCard key={post.id} post={post} />
         ))}
       </main>
+
+      <Pagination next={next} previous={previous} />
     </Fragment>
   );
 };
 
 export default Home;
 
-export const getStaticProps = async () => {
-  const { posts, pageInfo } = await getPosts();
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const page = Number(context.query.page) || 1;
+
+  const { posts, pageInfo } = await getPosts(page);
+
+  if (posts.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       posts,
+      page,
       pageInfo,
     },
-
-    revalidate: 600,
   };
 };

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import { PostFragment } from 'generated/graphql';
+import { PostViewFragment } from 'generated/graphql';
 import { locale } from 'lib/utils';
 
 interface PostCardProps {
-  post: PostFragment;
+  post: PostViewFragment;
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
@@ -13,9 +13,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       <a className='block'>
         <article>
           <div className='w-full rounded-lg bg-white/5 hover:bg-white/10 transition duration-200 shadow-lg p-4'>
-            <h2 className='text-rose-100 font-medium text-lg'>{post.title}</h2>
+            <h2 className='text-light font-medium text-lg'>{post.title}</h2>
 
-            <div className='flex flex-col item-start sm:flex-row sm:items-center sm:space-x-2 text-md text-rose-100/50 mb-2'>
+            <div className='flex flex-col item-start sm:flex-row sm:items-center sm:space-x-2 text-base text-dim mb-2'>
               <div>{locale(post.publishedAt)}</div>
 
               {post.categories.length > 0 && (
@@ -29,9 +29,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               </div>
             </div>
 
-            <p className='text-rose-100/80 text-lg leading-relaxed'>
-              {post.excerpt}
-            </p>
+            <p className='text-light text-lg leading-relaxed'>{post.excerpt}</p>
           </div>
         </article>
       </a>

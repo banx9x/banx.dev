@@ -1,15 +1,14 @@
-import { MDXRemote } from 'next-mdx-remote';
-import { Fragment } from 'react';
-import Head from 'next/head';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { parser } from 'lib/utils/parser';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import Link from 'next/link';
-import { getPostBySlug, getSlugs } from 'services/posts';
+import Navbar from 'components/navbar';
 import { PostQuery } from 'generated/graphql';
 import { locale } from 'lib/utils';
-import Navbar from 'components/navbar';
+import { parser } from 'lib/utils/parser';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import Head from 'next/head';
+import Link from 'next/link';
+import { ParsedUrlQuery } from 'querystring';
+import { Fragment } from 'react';
+import { getPostBySlug, getSlugs } from 'services/posts';
 
 interface PostProps extends PostQuery {
   mdx: MDXRemoteSerializeResult;
@@ -40,7 +39,7 @@ const Post: React.FC<PostProps> = ({ post, mdx }) => {
 
       <main className='pt-24'>
         <div className='px-2 mb-8'>
-          <h1 className='text-6xl text-rose-100 mb-2'>{post!.title}</h1>
+          <h1 className='text-6xl text-light mb-2'>{post!.title}</h1>
 
           <div className='flex flex-col sm:flex-row items-start sm:items-center text-dim sm:space-x-2 mb-2'>
             <div className='mr-1'>{locale(post!.publishedAt)}</div>

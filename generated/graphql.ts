@@ -1367,11 +1367,11 @@ export type Mutation = {
   deleteManyCategoriesConnection: CategoryConnection;
   /**
    * Delete many Series documents
-   * @deprecated Please use the new paginated many mutation (deleteManyPostSeriesConnection)
+   * @deprecated Please use the new paginated many mutation (deleteManyListSeriesConnection)
    */
-  deleteManyPostSeries: BatchPayload;
+  deleteManyListSeries: BatchPayload;
   /** Delete many Series documents, return deleted documents */
-  deleteManyPostSeriesConnection: SeriesConnection;
+  deleteManyListSeriesConnection: SeriesConnection;
   /**
    * Delete many Post documents
    * @deprecated Please use the new paginated many mutation (deleteManyPostsConnection)
@@ -1407,11 +1407,11 @@ export type Mutation = {
   publishManyCategoriesConnection: CategoryConnection;
   /**
    * Publish many Series documents
-   * @deprecated Please use the new paginated many mutation (publishManyPostSeriesConnection)
+   * @deprecated Please use the new paginated many mutation (publishManyListSeriesConnection)
    */
-  publishManyPostSeries: BatchPayload;
+  publishManyListSeries: BatchPayload;
   /** Publish many Series documents */
-  publishManyPostSeriesConnection: SeriesConnection;
+  publishManyListSeriesConnection: SeriesConnection;
   /**
    * Publish many Post documents
    * @deprecated Please use the new paginated many mutation (publishManyPostsConnection)
@@ -1459,11 +1459,11 @@ export type Mutation = {
   unpublishManyCategoriesConnection: CategoryConnection;
   /**
    * Unpublish many Series documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyPostSeriesConnection)
+   * @deprecated Please use the new paginated many mutation (unpublishManyListSeriesConnection)
    */
-  unpublishManyPostSeries: BatchPayload;
+  unpublishManyListSeries: BatchPayload;
   /** Find many Series documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyPostSeriesConnection: SeriesConnection;
+  unpublishManyListSeriesConnection: SeriesConnection;
   /**
    * Unpublish many Post documents
    * @deprecated Please use the new paginated many mutation (unpublishManyPostsConnection)
@@ -1494,12 +1494,12 @@ export type Mutation = {
   /** Update many Category documents */
   updateManyCategoriesConnection: CategoryConnection;
   /**
-   * Update many postSeries
-   * @deprecated Please use the new paginated many mutation (updateManyPostSeriesConnection)
+   * Update many listSeries
+   * @deprecated Please use the new paginated many mutation (updateManyListSeriesConnection)
    */
-  updateManyPostSeries: BatchPayload;
+  updateManyListSeries: BatchPayload;
   /** Update many Series documents */
-  updateManyPostSeriesConnection: SeriesConnection;
+  updateManyListSeriesConnection: SeriesConnection;
   /**
    * Update many posts
    * @deprecated Please use the new paginated many mutation (updateManyPostsConnection)
@@ -1589,12 +1589,12 @@ export type MutationDeleteManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationDeleteManyPostSeriesArgs = {
+export type MutationDeleteManyListSeriesArgs = {
   where?: InputMaybe<SeriesManyWhereInput>;
 };
 
 
-export type MutationDeleteManyPostSeriesConnectionArgs = {
+export type MutationDeleteManyListSeriesConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1705,13 +1705,13 @@ export type MutationPublishManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationPublishManyPostSeriesArgs = {
+export type MutationPublishManyListSeriesArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<SeriesManyWhereInput>;
 };
 
 
-export type MutationPublishManyPostSeriesConnectionArgs = {
+export type MutationPublishManyListSeriesConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1887,13 +1887,13 @@ export type MutationUnpublishManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationUnpublishManyPostSeriesArgs = {
+export type MutationUnpublishManyListSeriesArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<SeriesManyWhereInput>;
 };
 
 
-export type MutationUnpublishManyPostSeriesConnectionArgs = {
+export type MutationUnpublishManyListSeriesConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1981,13 +1981,13 @@ export type MutationUpdateManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationUpdateManyPostSeriesArgs = {
+export type MutationUpdateManyListSeriesArgs = {
   data: SeriesUpdateManyInput;
   where?: InputMaybe<SeriesManyWhereInput>;
 };
 
 
-export type MutationUpdateManyPostSeriesConnectionArgs = {
+export type MutationUpdateManyListSeriesConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   data: SeriesUpdateManyInput;
@@ -2716,14 +2716,14 @@ export type Query = {
   category?: Maybe<Category>;
   /** Retrieve document version */
   categoryVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple listSeries */
+  listSeries: Array<Series>;
+  /** Retrieve multiple listSeries using the Relay connection interface */
+  listSeriesConnection: SeriesConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
   /** Retrieve a single post */
   post?: Maybe<Post>;
-  /** Retrieve multiple postSeries */
-  postSeries: Array<Series>;
-  /** Retrieve multiple postSeries using the Relay connection interface */
-  postSeriesConnection: SeriesConnection;
   /** Retrieve document version */
   postVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple posts */
@@ -2831,6 +2831,32 @@ export type QueryCategoryVersionArgs = {
 };
 
 
+export type QueryListSeriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SeriesOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SeriesWhereInput>;
+};
+
+
+export type QueryListSeriesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SeriesOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SeriesWhereInput>;
+};
+
+
 export type QueryNodeArgs = {
   id: Scalars['ID'];
   locales?: Array<Locale>;
@@ -2842,32 +2868,6 @@ export type QueryPostArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
   where: PostWhereUniqueInput;
-};
-
-
-export type QueryPostSeriesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: Array<Locale>;
-  orderBy?: InputMaybe<SeriesOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  stage?: Stage;
-  where?: InputMaybe<SeriesWhereInput>;
-};
-
-
-export type QueryPostSeriesConnectionArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: Array<Locale>;
-  orderBy?: InputMaybe<SeriesOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  stage?: Stage;
-  where?: InputMaybe<SeriesWhereInput>;
 };
 
 
@@ -4961,47 +4961,80 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type PostQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
+export type CategoryViewFragment = { id: string, slug: string, name: string };
+
+export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostQuery = { post?: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, content: string, image: { url: string }, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } | null };
+export type CategoriesQuery = { categoriesConnection: { edges: Array<{ node: { id: string, slug: string, name: string } }> } };
 
-export type CategoryFragment = { id: string, name: string, slug: string };
+export type PageViewFragment = { hasNextPage: boolean, hasPreviousPage: boolean };
 
-export type SeriesFragment = { id: string, title: string, slug: string };
-
-export type PostFragment = { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null };
+export type PostViewFragment = { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, slug: string, name: string }>, series?: { id: string, slug: string, title: string } | null };
 
 export type PostsQueryVariables = Exact<{
+  perPage?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type PostsQuery = { postsConnection: { edges: Array<{ node: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, name: string, slug: string }>, series?: { id: string, title: string, slug: string } | null } }>, pageInfo: { hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
+export type PostsQuery = { postsConnection: { edges: Array<{ node: { id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, categories: Array<{ id: string, slug: string, name: string }>, series?: { id: string, slug: string, title: string } | null } }>, pageInfo: { hasNextPage: boolean, hasPreviousPage: boolean } } };
+
+export type SlugViewFragment = { slug: string };
 
 export type SlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SlugsQuery = { posts: Array<{ slug: string }> };
 
-export const CategoryFragmentDoc = gql`
-    fragment Category on Category {
+export type PostContentFragment = { content: string, id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, image: { url: string }, categories: Array<{ id: string, slug: string, name: string }>, series?: { id: string, slug: string, title: string } | null };
+
+export type PostQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type PostQuery = { post?: { content: string, id: string, slug: string, title: string, description: string, publishedAt?: any | null, excerpt: string, image: { url: string }, categories: Array<{ id: string, slug: string, name: string }>, series?: { id: string, slug: string, title: string } | null } | null };
+
+export type TotalPostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TotalPostsQuery = { postsConnection: { aggregate: { count: number } } };
+
+export type SeriesViewFragment = { id: string, slug: string, title: string };
+
+export type SeriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SeriesQuery = { listSeriesConnection: { edges: Array<{ node: { id: string, slug: string, title: string } }> } };
+
+export const PageViewFragmentDoc = gql`
+    fragment PageView on PageInfo {
+  hasNextPage
+  hasPreviousPage
+}
+    `;
+export const SlugViewFragmentDoc = gql`
+    fragment SlugView on Post {
+  slug
+}
+    `;
+export const CategoryViewFragmentDoc = gql`
+    fragment CategoryView on Category {
   id
+  slug
   name
-  slug
 }
     `;
-export const SeriesFragmentDoc = gql`
-    fragment Series on Series {
+export const SeriesViewFragmentDoc = gql`
+    fragment SeriesView on Series {
   id
-  title
   slug
+  title
 }
     `;
-export const PostFragmentDoc = gql`
-    fragment Post on Post {
+export const PostViewFragmentDoc = gql`
+    fragment PostView on Post {
   id
   slug
   title
@@ -5009,68 +5042,88 @@ export const PostFragmentDoc = gql`
   publishedAt
   excerpt
   categories {
-    ...Category
+    ...CategoryView
   }
   series {
-    ...Series
+    ...SeriesView
   }
 }
-    ${CategoryFragmentDoc}
-${SeriesFragmentDoc}`;
-export const PostDocument = gql`
-    query post($slug: String!) {
-  post(where: {slug: $slug}) {
-    id
-    slug
-    title
-    description
-    publishedAt
-    image {
-      url(transformation: {image: {resize: {height: 630, width: 1200}}})
+    ${CategoryViewFragmentDoc}
+${SeriesViewFragmentDoc}`;
+export const PostContentFragmentDoc = gql`
+    fragment PostContent on Post {
+  ...PostView
+  image {
+    url(transformation: {image: {resize: {height: 630, width: 1200}}})
+  }
+  content
+}
+    ${PostViewFragmentDoc}`;
+export const CategoriesDocument = gql`
+    query categories {
+  categoriesConnection {
+    edges {
+      node {
+        ...CategoryView
+      }
     }
-    categories {
-      id
-      name
-      slug
-    }
-    series {
-      id
-      title
-      slug
-    }
-    excerpt
-    content
   }
 }
-    `;
+    ${CategoryViewFragmentDoc}`;
 export const PostsDocument = gql`
-    query posts($skip: Int) {
+    query posts($perPage: Int = 5, $skip: Int = 0) {
   postsConnection(
     stage: PUBLISHED
     orderBy: publishedAt_DESC
-    first: 3
+    first: $perPage
     skip: $skip
   ) {
     edges {
       node {
-        ...Post
+        ...PostView
       }
     }
     pageInfo {
-      hasNextPage
-      hasPreviousPage
-      pageSize
+      ...PageView
     }
   }
 }
-    ${PostFragmentDoc}`;
+    ${PostViewFragmentDoc}
+${PageViewFragmentDoc}`;
 export const SlugsDocument = gql`
     query slugs {
   posts {
-    slug
+    ...SlugView
+  }
+}
+    ${SlugViewFragmentDoc}`;
+export const PostDocument = gql`
+    query post($slug: String!) {
+  post(where: {slug: $slug}) {
+    ...PostContent
+  }
+}
+    ${PostContentFragmentDoc}`;
+export const TotalPostsDocument = gql`
+    query totalPosts {
+  postsConnection {
+    aggregate {
+      count
+    }
   }
 }
     `;
+export const SeriesDocument = gql`
+    query series {
+  listSeriesConnection {
+    edges {
+      node {
+        ...SeriesView
+      }
+    }
+  }
+}
+    ${SeriesViewFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -5079,14 +5132,23 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    post(variables: PostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PostQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PostQuery>(PostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'post', 'query');
+    categories(variables?: CategoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CategoriesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CategoriesQuery>(CategoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'categories', 'query');
     },
     posts(variables?: PostsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PostsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PostsQuery>(PostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'posts', 'query');
     },
     slugs(variables?: SlugsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SlugsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SlugsQuery>(SlugsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'slugs', 'query');
+    },
+    post(variables: PostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PostQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PostQuery>(PostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'post', 'query');
+    },
+    totalPosts(variables?: TotalPostsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TotalPostsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TotalPostsQuery>(TotalPostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'totalPosts', 'query');
+    },
+    series(variables?: SeriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SeriesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SeriesQuery>(SeriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'series', 'query');
     }
   };
 }

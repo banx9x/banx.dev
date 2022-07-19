@@ -9670,7 +9670,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteManyPostSeries",
+            "name": "deleteManyListSeries",
             "description": "Delete many Series documents",
             "args": [
               {
@@ -9696,10 +9696,10 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use the new paginated many mutation (deleteManyPostSeriesConnection)"
+            "deprecationReason": "Please use the new paginated many mutation (deleteManyListSeriesConnection)"
           },
           {
-            "name": "deleteManyPostSeriesConnection",
+            "name": "deleteManyListSeriesConnection",
             "description": "Delete many Series documents, return deleted documents",
             "args": [
               {
@@ -10748,7 +10748,7 @@
             "deprecationReason": null
           },
           {
-            "name": "publishManyPostSeries",
+            "name": "publishManyListSeries",
             "description": "Publish many Series documents",
             "args": [
               {
@@ -10798,10 +10798,10 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use the new paginated many mutation (publishManyPostSeriesConnection)"
+            "deprecationReason": "Please use the new paginated many mutation (publishManyListSeriesConnection)"
           },
           {
-            "name": "publishManyPostSeriesConnection",
+            "name": "publishManyListSeriesConnection",
             "description": "Publish many Series documents",
             "args": [
               {
@@ -12632,7 +12632,7 @@
             "deprecationReason": null
           },
           {
-            "name": "unpublishManyPostSeries",
+            "name": "unpublishManyListSeries",
             "description": "Unpublish many Series documents",
             "args": [
               {
@@ -12682,10 +12682,10 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use the new paginated many mutation (unpublishManyPostSeriesConnection)"
+            "deprecationReason": "Please use the new paginated many mutation (unpublishManyListSeriesConnection)"
           },
           {
-            "name": "unpublishManyPostSeriesConnection",
+            "name": "unpublishManyListSeriesConnection",
             "description": "Find many Series documents that match criteria in specified stage and unpublish from target stages",
             "args": [
               {
@@ -13484,8 +13484,8 @@
             "deprecationReason": null
           },
           {
-            "name": "updateManyPostSeries",
-            "description": "Update many postSeries",
+            "name": "updateManyListSeries",
+            "description": "Update many listSeries",
             "args": [
               {
                 "name": "data",
@@ -13526,10 +13526,10 @@
               }
             },
             "isDeprecated": true,
-            "deprecationReason": "Please use the new paginated many mutation (updateManyPostSeriesConnection)"
+            "deprecationReason": "Please use the new paginated many mutation (updateManyListSeriesConnection)"
           },
           {
-            "name": "updateManyPostSeriesConnection",
+            "name": "updateManyListSeriesConnection",
             "description": "Update many Series documents",
             "args": [
               {
@@ -19683,146 +19683,8 @@
             "deprecationReason": null
           },
           {
-            "name": "node",
-            "description": "Fetches an object given its ID",
-            "args": [
-              {
-                "name": "id",
-                "description": "The ID of an object",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "locales",
-                "description": "Defines which locales should be returned.\n\nNote that `Node` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument may be overwritten by another locales definition in a relational child field, this will effectively use the overwritten argument for the affected query's subtree.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "LIST",
-                    "name": null,
-                    "ofType": {
-                      "kind": "NON_NULL",
-                      "name": null,
-                      "ofType": {
-                        "kind": "ENUM",
-                        "name": "Locale",
-                        "ofType": null
-                      }
-                    }
-                  }
-                },
-                "defaultValue": "[en]",
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "stage",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Stage",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": "PUBLISHED",
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "post",
-            "description": "Retrieve a single post",
-            "args": [
-              {
-                "name": "locales",
-                "description": "Defines which locales should be returned.\n\nNote that `Post` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument may be overwritten by another locales definition in a relational child field, this will effectively use the overwritten argument for the affected query's subtree.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "LIST",
-                    "name": null,
-                    "ofType": {
-                      "kind": "NON_NULL",
-                      "name": null,
-                      "ofType": {
-                        "kind": "ENUM",
-                        "name": "Locale",
-                        "ofType": null
-                      }
-                    }
-                  }
-                },
-                "defaultValue": "[en]",
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "stage",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Stage",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": "PUBLISHED",
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostWhereUniqueInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Post",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "postSeries",
-            "description": "Retrieve multiple postSeries",
+            "name": "listSeries",
+            "description": "Retrieve multiple listSeries",
             "args": [
               {
                 "name": "after",
@@ -19970,8 +19832,8 @@
             "deprecationReason": null
           },
           {
-            "name": "postSeriesConnection",
-            "description": "Retrieve multiple postSeries using the Relay connection interface",
+            "name": "listSeriesConnection",
+            "description": "Retrieve multiple listSeries using the Relay connection interface",
             "args": [
               {
                 "name": "after",
@@ -20106,6 +19968,144 @@
                 "name": "SeriesConnection",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "node",
+            "description": "Fetches an object given its ID",
+            "args": [
+              {
+                "name": "id",
+                "description": "The ID of an object",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "locales",
+                "description": "Defines which locales should be returned.\n\nNote that `Node` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument may be overwritten by another locales definition in a relational child field, this will effectively use the overwritten argument for the affected query's subtree.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "Locale",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": "[en]",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "stage",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "Stage",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": "PUBLISHED",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "post",
+            "description": "Retrieve a single post",
+            "args": [
+              {
+                "name": "locales",
+                "description": "Defines which locales should be returned.\n\nNote that `Post` is a model without localized fields and will not be affected directly by this argument, however the locales will be passed on to any relational fields in the query's subtree for filtering.\nFor related models with localized fields in the query's subtree, the first locale matching the provided list of locales will be returned, entries with non matching locales will be filtered out.\n\nThis argument may be overwritten by another locales definition in a relational child field, this will effectively use the overwritten argument for the affected query's subtree.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "Locale",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": "[en]",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "stage",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "Stage",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": "PUBLISHED",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PostWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Post",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

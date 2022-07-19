@@ -7,10 +7,6 @@ interface NavProps {}
 const Nav: React.FC<NavProps> = ({}) => {
   return (
     <nav className='flex space-x-4'>
-      <NavLink href='/' icon={<BiHomeHeart />}>
-        Home
-      </NavLink>
-
       <NavLink href='/series' icon={<BiStats />}>
         Series
       </NavLink>
