@@ -2,7 +2,7 @@ import Navbar from 'components/navbar';
 import { PostQuery } from 'generated/graphql';
 import { locale } from 'lib/utils';
 import { parser } from 'lib/utils/parser';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -83,7 +83,7 @@ interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { slug } = params as Params;
 
   const post = await getPostBySlug(slug);

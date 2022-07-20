@@ -4,9 +4,8 @@ import Header from 'components/header';
 import Navbar from 'components/navbar';
 import Pagination from 'components/pagination';
 import PostCard from 'components/post';
-import { useIntersection } from 'lib/hooks';
 import type {
-  GetServerSideProps,
+  GetServerSidePropsContext,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
@@ -76,16 +75,12 @@ const Home: NextPage<
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const page = Number(context.query.page) || 1;
 
   const { posts, pageInfo } = await getPosts(page);
-
-  if (posts.length === 0) {
-    return {
-      notFound: true,
-    };
-  }
 
   return {
     props: {
